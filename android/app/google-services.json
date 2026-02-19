@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "19539010998",
+    "project_id": "haven-c8c11",
+    "storage_bucket": "haven-c8c11.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19539010998:android:ce3f1aec9e8a747c458d17",
+        "android_client_info": {
+          "package_name": "com.example.paradise_view"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4A9htaV8VWSDck1KxHBh8PkX0wNTSFQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
