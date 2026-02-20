@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:paradise_view/Features/Auth/Controller/auth_controller.dart';
 import 'package:paradise_view/Features/Auth/Views/login_page.dart';
 import 'package:paradise_view/Features/Auth/Views/register_page.dart';
 import 'package:paradise_view/Features/Auth/Views/splash_page.dart';

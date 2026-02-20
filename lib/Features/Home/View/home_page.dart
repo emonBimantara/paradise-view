@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paradise_view/Components/custom_category_room.dart';
+import 'package:paradise_view/Components/custom_room_card.dart';
 import 'package:paradise_view/Features/Home/Model/room_model.dart';
 import 'package:paradise_view/Features/Home/Service/room_service.dart';
 
@@ -21,15 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     categoryList = RoomService().getRoomCategories();
-
-    categoryList.then((categories) {
-      if (categories.contains("Standard")) {
-        setState(() {
-          selectedCategory = "Standard";
-          roomList = RoomService().getRooms(selectedCategory);
-        });
-      }
-    });
+    selectedCategory = "Standard";
+    roomList = RoomService().getRooms(selectedCategory);
     super.initState();
   }
 
@@ -138,14 +132,10 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 15),
 
               SizedBox(
-                height: 50,
+                height: 40,
                 child: FutureBuilder<List<String>>(
                   future: categoryList,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator(color: Color(0xff7C6A46),));
-                    }
-
                     if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return Text("No categories found");
                     }
@@ -160,6 +150,51 @@ class _HomePageState extends State<HomePage> {
                           selectedCategory = name;
                           roomList = RoomService().getRooms(selectedCategory);
                         });
+                      },
+                    );
+                  },
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              Expanded(
+                child: FutureBuilder(
+                  future: roomList,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff7C6A46),
+                        ),
+                      );
+                    }
+                
+                    final rooms = snapshot.data ?? [];
+                    if (rooms.isEmpty) {
+                      return Center(child: Text("No Rooms Available"));
+                    }
+                
+                    if (snapshot.hasError) {
+                      return Center(child: Text("Error : ${snapshot.error}"));
+                    }
+                
+                    return ListView.builder(
+                      itemCount: rooms.length,
+                      itemBuilder: (context, index) {
+                        final room = rooms[index];
+                        return GestureDetector(
+                          onTap: () {},
+                          child: CustomRoomCard(
+                            title: room.title,
+                            imageUrl: room.roomImg.isNotEmpty
+                                ? room.roomImg[0]
+                                : 'https://placeholder.com/150',
+                            rating: room.rating,
+                            price: room.price,
+                            guest: room.guest,
+                          ),
+                        );
                       },
                     );
                   },
