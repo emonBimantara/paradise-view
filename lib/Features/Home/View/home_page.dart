@@ -27,6 +27,20 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  String getGreeting() {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 5 && hour < 12) {
+      return "Good Morning";
+    } else if (hour >= 12 && hour < 15) {
+      return "Good Afternoon";
+    } else if (hour >= 15 && hour < 18) {
+      return "Good Evening";
+    } else {
+      return "Good Night";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,21 +55,24 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset('assets/hamburger.png', height: 20),
-                    Text('Jakarta, Indonesia', style: TextStyle(fontSize: 15)),
+                    Text(getGreeting(), style: TextStyle(fontSize: 15)),
                     Icon(Icons.dark_mode),
                   ],
                 ),
                 SizedBox(height: 35),
-          
+
                 Container(
                   decoration: BoxDecoration(
                     color: Color(0xfffafafa),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {});
+                    },
                     controller: searchController,
                     decoration: InputDecoration(
-                      hintText: "Search for our nearby hotel",
+                      hintText: "Search your favorite room",
                       hintStyle: TextStyle(
                         color: Color(0x66000000),
                         fontSize: 14,
@@ -66,9 +83,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-          
+
                 SizedBox(height: 25),
-          
+
                 Container(
                   height: 190,
                   decoration: BoxDecoration(
@@ -116,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-          
+
                 SizedBox(height: 25),
-          
+
                 Center(
                   child: Text(
                     'Choose a room',
@@ -129,20 +146,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-          
+
                 SizedBox(height: 15),
-          
+
                 SizedBox(
                   height: 40,
                   child: FutureBuilder<List<String>>(
                     future: categoryList,
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Text("No categories found");
-                      }
-          
                       List<String> category = snapshot.data!;
-          
+
                       return CustomCategoryRoom(
                         categories: category,
                         selectedCategory: selectedCategory,
@@ -156,9 +169,9 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-          
+
                 SizedBox(height: 10),
-          
+
                 FutureBuilder(
                   future: roomList,
                   builder: (context, snapshot) {
@@ -169,22 +182,30 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }
-                
+
                     final rooms = snapshot.data ?? [];
                     if (rooms.isEmpty) {
                       return Center(child: Text("No Rooms Available"));
                     }
-                
-                    if (snapshot.hasError) {
-                      return Center(child: Text("Error : ${snapshot.error}"));
+
+                    final searchQuery = searchController.text.toLowerCase();
+                    final filteredRooms = rooms.where((room) {
+                      return room.title.toLowerCase().contains(searchQuery);
+                    }).toList();
+
+                    if (filteredRooms.isEmpty) {
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: Center(child: Text("No Data")),
+                      );
                     }
-                
+
                     return ListView.builder(
-                      shrinkWrap: true, 
+                      shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: rooms.length,
+                      itemCount: filteredRooms.length,
                       itemBuilder: (context, index) {
-                        final room = rooms[index];
+                        final room = filteredRooms[index];
                         return GestureDetector(
                           onTap: () {},
                           child: CustomRoomCard(
