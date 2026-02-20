@@ -26,7 +26,7 @@ class AuthController extends GetxController {
 
       Get.snackbar(
         "Success",
-        "Login berhasil",
+        "Successfuly Login",
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
@@ -34,7 +34,7 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "Error",
-        e.message ?? "Login gagal",
+        e.message ?? "Failed to Login",
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
@@ -55,7 +55,7 @@ class AuthController extends GetxController {
 
       Get.snackbar(
         "Success",
-        "Register berhasil",
+        "Successfuly Register",
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
@@ -63,7 +63,7 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "Error",
-        e.message ?? "Register gagal",
+        e.message ?? "Failed to Register",
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
