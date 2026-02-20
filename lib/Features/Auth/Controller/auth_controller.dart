@@ -12,6 +12,7 @@ class AuthController extends GetxController {
   void onInit() {
     super.onInit();
     firebaseUser.bindStream(auth.authStateChanges());
+    ever(firebaseUser, setInitialScreen);
   }
 
   Future<void> login(String email, String password) async {
@@ -30,7 +31,6 @@ class AuthController extends GetxController {
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
       );
-      Get.offAllNamed('/home');
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "Error",
@@ -60,7 +60,6 @@ class AuthController extends GetxController {
         margin: const EdgeInsets.all(15),
         borderRadius: 12,
       );
-      Get.offAllNamed('/login');
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "Error",

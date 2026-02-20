@@ -7,6 +7,7 @@ class RoomModel {
   final List<String> facilities;
   final int price;
   final double rating;
+  final int guest;
 
   RoomModel({
     required this.id,
@@ -16,7 +17,8 @@ class RoomModel {
     required this.roomImg,
     required this.facilities,
     required this.price,
-    required this.rating,
+    required this.rating, 
+    required this.guest,
   });
 
   factory RoomModel.fromFireStore(String id, Map<String, dynamic> data) {
@@ -29,6 +31,7 @@ class RoomModel {
       facilities: List<String>.from(data['facilities'] ?? []),
       price: (data['price'] as num?)?.toInt() ?? 0,
       rating: (data['rating'] as num?)?.toDouble() ?? 0.0,
+      guest: (data['guest'] as num?)?.toInt() ?? 0
     );
   }
 }
