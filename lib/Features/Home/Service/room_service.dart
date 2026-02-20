@@ -22,6 +22,7 @@ class RoomService {
       final snapshot = await db
           .collection('rooms')
           .where('category', isEqualTo: selectedCategory)
+          .orderBy('order')
           .get();
 
       return snapshot.docs.map((doc) {
