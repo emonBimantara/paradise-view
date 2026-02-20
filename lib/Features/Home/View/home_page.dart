@@ -32,134 +32,134 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset('assets/hamburger.png', height: 20),
-                  Text('Jakarta, Indonesia', style: TextStyle(fontSize: 15)),
-                  Icon(Icons.dark_mode),
-                ],
-              ),
-              SizedBox(height: 35),
-
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xfffafafa),
-                  borderRadius: BorderRadius.circular(10),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset('assets/hamburger.png', height: 20),
+                    Text('Jakarta, Indonesia', style: TextStyle(fontSize: 15)),
+                    Icon(Icons.dark_mode),
+                  ],
                 ),
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: "Search for our nearby hotel",
-                    hintStyle: TextStyle(
-                      color: Color(0x66000000),
-                      fontSize: 14,
+                SizedBox(height: 35),
+          
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xfffafafa),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      hintText: "Search for our nearby hotel",
+                      hintStyle: TextStyle(
+                        color: Color(0x66000000),
+                        fontSize: 14,
+                      ),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                      prefixIcon: Image.asset('assets/search.png', height: 10),
                     ),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                    prefixIcon: Image.asset('assets/search.png', height: 10),
                   ),
                 ),
-              ),
-
-              SizedBox(height: 25),
-
-              Container(
-                height: 190,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/containImg.png'),
-                    fit: BoxFit.cover,
+          
+                SizedBox(height: 25),
+          
+                Container(
+                  height: 190,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/containImg.png'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 250,
-                        child: Text(
-                          'Stay where every moment feels special.',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 250,
+                          child: Text(
+                            'Stay where every moment feels special.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
                             color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'Book now',
-                          style: TextStyle(
-                            color: Color(0xff7C6A46),
-                            fontWeight: FontWeight.w500,
+                          child: Text(
+                            'Book now',
+                            style: TextStyle(
+                              color: Color(0xff7C6A46),
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-
-              SizedBox(height: 25),
-
-              Center(
-                child: Text(
-                  'Choose a room',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff7C6A46),
-                    fontSize: 20,
+          
+                SizedBox(height: 25),
+          
+                Center(
+                  child: Text(
+                    'Choose a room',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff7C6A46),
+                      fontSize: 20,
+                    ),
                   ),
                 ),
-              ),
-
-              SizedBox(height: 15),
-
-              SizedBox(
-                height: 40,
-                child: FutureBuilder<List<String>>(
-                  future: categoryList,
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Text("No categories found");
-                    }
-
-                    List<String> category = snapshot.data!;
-
-                    return CustomCategoryRoom(
-                      categories: category,
-                      selectedCategory: selectedCategory,
-                      onCategorySelected: (name) {
-                        setState(() {
-                          selectedCategory = name;
-                          roomList = RoomService().getRooms(selectedCategory);
-                        });
-                      },
-                    );
-                  },
+          
+                SizedBox(height: 15),
+          
+                SizedBox(
+                  height: 40,
+                  child: FutureBuilder<List<String>>(
+                    future: categoryList,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Text("No categories found");
+                      }
+          
+                      List<String> category = snapshot.data!;
+          
+                      return CustomCategoryRoom(
+                        categories: category,
+                        selectedCategory: selectedCategory,
+                        onCategorySelected: (name) {
+                          setState(() {
+                            selectedCategory = name;
+                            roomList = RoomService().getRooms(selectedCategory);
+                          });
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-
-              SizedBox(height: 10),
-
-              Expanded(
-                child: FutureBuilder(
+          
+                SizedBox(height: 10),
+          
+                FutureBuilder(
                   future: roomList,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -180,6 +180,8 @@ class _HomePageState extends State<HomePage> {
                     }
                 
                     return ListView.builder(
+                      shrinkWrap: true, 
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: rooms.length,
                       itemBuilder: (context, index) {
                         final room = rooms[index];
@@ -199,8 +201,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
