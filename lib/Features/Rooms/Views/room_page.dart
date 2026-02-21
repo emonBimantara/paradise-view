@@ -88,7 +88,7 @@ class _RoomPageState extends State<RoomPage> {
                         facility,
                         style: TextStyle(color: Color(0xff7C6A46)),
                       ),
-                      backgroundColor: Colors.white
+                      backgroundColor: Colors.white,
                     );
                   }).toList(),
                 ),
@@ -140,7 +140,10 @@ class _RoomPageState extends State<RoomPage> {
                   horizontal: 10,
                   vertical: 10,
                 ),
-                child: CustomButton(text: "Book Room"),
+                child: GestureDetector(
+                  onTap: ()=> Get.toNamed('/checkout', arguments: room),
+                  child: CustomButton(text: "Book Room"),
+                ),
               ),
             ],
           ),

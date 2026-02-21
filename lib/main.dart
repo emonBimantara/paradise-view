@@ -5,6 +5,7 @@ import 'package:paradise_view/Features/Auth/Views/login_page.dart';
 import 'package:paradise_view/Features/Auth/Views/register_page.dart';
 import 'package:paradise_view/Features/Auth/Views/splash_page.dart';
 import 'package:paradise_view/Features/Home/View/home_page.dart';
+import 'package:paradise_view/Features/Rooms/Views/checkout_page.dart';
 import 'package:paradise_view/Features/Rooms/Views/room_page.dart';
 import 'package:paradise_view/firebase_options.dart';
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegisterPage()),
         GetPage(name: '/home', page: () => const HomePage()),
-        GetPage(name: '/room', page: () => const RoomPage())
+        GetPage(name: '/room', page: () => const RoomPage()),
+        GetPage(name: '/checkout', page: () => const CheckoutPage())
       ],
     );
   }
