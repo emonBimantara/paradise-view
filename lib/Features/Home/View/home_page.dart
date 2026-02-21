@@ -57,7 +57,9 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Image.asset('assets/hamburger.png', height: 20),
                     Text(getGreeting(), style: TextStyle(fontSize: 15)),
-                    Icon(Icons.dark_mode),
+                    GestureDetector(
+                      onTap: () => Get.toNamed('/history'),
+                      child: Image.asset('assets/book.png', height: 25)),
                   ],
                 ),
                 SizedBox(height: 35),

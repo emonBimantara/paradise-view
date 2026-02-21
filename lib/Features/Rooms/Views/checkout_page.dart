@@ -227,12 +227,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   );
                 },
                 child: bookingController.isLoading.value
-                    ? const Center(
+                    ? Center(
                         child: CircularProgressIndicator(
                           color: Color(0xff7C6A46),
                         ),
                       )
-                    : const CustomButton(text: "Confirm Booking"),
+                    : CustomButton(text: "Confirm Booking"),
               ),
             ),
           ],

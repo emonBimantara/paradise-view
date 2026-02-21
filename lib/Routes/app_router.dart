@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paradise_view/Features/Auth/Views/login_page.dart';
 import 'package:paradise_view/Features/Auth/Views/register_page.dart';
 import 'package:paradise_view/Features/Auth/Views/splash_page.dart';
+import 'package:paradise_view/Features/History/Views/history_page.dart';
 import 'package:paradise_view/Features/Home/View/home_page.dart';
 import 'package:paradise_view/Features/Rooms/Views/checkout_page.dart';
 import 'package:paradise_view/Features/Rooms/Views/room_page.dart';
@@ -22,6 +23,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => RoomPage());
       case AppRoutes.checkoutPage:
         return MaterialPageRoute(builder: (_) => CheckoutPage());
+      case AppRoutes.historyPage:
+        return MaterialPageRoute(builder: (_) => HistoryPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(body: Center(child: Text("Page Not Found"))),

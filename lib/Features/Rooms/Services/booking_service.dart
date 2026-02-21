@@ -13,5 +13,31 @@ class BookingService {
       return false;
     }
   }
-}
 
+  Future<List<BookingModel>> getUserBookings(String userId) async {
+    try {
+      final snapshot = await db
+          .collection('bookings')
+          .where('userId', isEqualTo: userId)
+          .orderBy('createdAt', descending: true)
+          .get();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return BookingModel(
+          userId: data['userId'],
+          roomId: data['roomId'],
+          roomTitle: data['roomTitle'],
+          checkIn: (data['checkIn'] as Timestamp).toDate(),
+          checkOut: (data['checkOut'] as Timestamp).toDate(),
+          totalPrice: data['totalPrice'],
+          totalNights: data['totalNights'],
+          createdAt: (data['createdAt'] as Timestamp).toDate(),
+        );
+      }).toList();
+    } catch (e) {
+      print("ERROR GET BOOKINGS: $e");
+      return [];
+    }
+  }
+}
