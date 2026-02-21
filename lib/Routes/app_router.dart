@@ -3,6 +3,7 @@ import 'package:paradise_view/Features/Auth/Views/login_page.dart';
 import 'package:paradise_view/Features/Auth/Views/register_page.dart';
 import 'package:paradise_view/Features/Auth/Views/splash_page.dart';
 import 'package:paradise_view/Features/Home/View/home_page.dart';
+import 'package:paradise_view/Features/Rooms/Views/room_page.dart';
 import 'package:paradise_view/Routes/app_routes.dart';
 
 class AppRouter {
@@ -16,6 +17,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => RegisterPage());
       case AppRoutes.homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
+      case AppRoutes.roomPage:
+        return MaterialPageRoute(builder: (_) => RoomPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(body: Center(child: Text("Page Not Found"))),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:paradise_view/Components/custom_category_room.dart';
 import 'package:paradise_view/Components/custom_room_card.dart';
 import 'package:paradise_view/Features/Home/Model/room_model.dart';
@@ -154,6 +155,22 @@ class _HomePageState extends State<HomePage> {
                   child: FutureBuilder<List<String>>(
                     future: categoryList,
                     builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Color(0xff7C6A46),
+                              strokeWidth: 2,
+                            ),
+                          ),
+                        );
+                      }
+
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Center(child: Text("No categories found"));
+                      }
                       List<String> category = snapshot.data!;
 
                       return CustomCategoryRoom(
@@ -207,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         final room = filteredRooms[index];
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () =>
+                              Get.toNamed('/room', arguments: room),
                           child: CustomRoomCard(
                             title: room.title,
                             imageUrl: room.roomImg.isNotEmpty

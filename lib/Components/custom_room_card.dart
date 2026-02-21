@@ -34,116 +34,112 @@ class CustomRoomCard extends StatelessWidget {
           ),
         ],
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: () {},
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(18),
-                topRight: Radius.circular(18),
-              ),
-              child: Image.network(
-                imageUrl,
-                height: 170,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(18),
+              topRight: Radius.circular(18),
             ),
-      
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          title,
+            child: Image.network(
+              imageUrl,
+              height: 170,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
+            
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.star, color: Colors.amber, size: 18),
+                        SizedBox(width: 4),
+                        Text(
+                          rating.toStringAsFixed(1),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 14,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.star, color: Colors.amber, size: 18),
-                          SizedBox(width: 4),
-                          Text(
-                            rating.toStringAsFixed(1),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-      
-                  SizedBox(height: 12),
-      
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.people_alt_outlined,
-                            size: 18,
+                      ],
+                    ),
+                  ],
+                ),
+            
+                SizedBox(height: 12),
+            
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.people_alt_outlined,
+                          size: 18,
+                          color: Colors.grey.shade600,
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          "$guest Guests",
+                          style: TextStyle(
                             color: Colors.grey.shade600,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(width: 6),
-                          Text(
-                            "$guest Guests",
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        ),
+                      ],
+                    ),
+            
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Start from",
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey,
                           ),
-                        ],
-                      ),
-      
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Start from",
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Colors.grey,
-                            ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          "Rp ${formatter.format(price)}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xff7C6A46),
                           ),
-                          SizedBox(height: 2),
-                          Text(
-                            "Rp ${formatter.format(price)}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: Color(0xff7C6A46),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
