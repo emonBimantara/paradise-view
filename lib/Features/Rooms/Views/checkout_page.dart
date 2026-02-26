@@ -36,7 +36,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             datePickerTheme: DatePickerThemeData(
               rangeSelectionBackgroundColor: Color(
                 0xff7C6A46,
-              ).withValues(alpha: 0.15),
+              ).withValues(alpha: 0.2),
             ),
           ),
           child: child!,
